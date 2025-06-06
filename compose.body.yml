@@ -1,0 +1,40 @@
+services:
+  ecu_engine:
+    profiles:
+      - car
+    image: localhost:5432/ecu_engine:0.1.1
+    build:
+      context: ./ecu_engine
+      dockerfile: Dockerfile
+      network: host
+    container_name: ecu_engine
+    develop:
+      watch:
+        - action: rebuild
+          path: ./ecu_engine
+    restart: on-failure:3
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+
+  tire_monitor:
+    profiles:
+      - car
+    image: localhost:5432/tire_monitor:0.1.1
+    build:
+      context: ./tire_monitor
+      dockerfile: Dockerfile
+      network: host
+    container_name: tire_monitor
+    develop:
+      watch:
+        - action: rebuild
+          path: ./tire_monitor
+    restart: on-failure:3
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
