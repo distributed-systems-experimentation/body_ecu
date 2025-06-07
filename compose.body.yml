@@ -2,7 +2,7 @@ services:
   ecu_engine:
     profiles:
       - car
-    image: localhost:5432/ecu_engine:0.1.1
+    image: ghcr.io/distributed-systems-experimentation/ecu_engine/ecu_engine:v0.1.1
     build:
       context: ./ecu_engine
       dockerfile: Dockerfile
@@ -22,7 +22,7 @@ services:
   tire_monitor:
     profiles:
       - car
-    image: localhost:5432/tire_monitor:0.1.1
+    image: ghcr.io/distributed-systems-experimentation/tire_monitor/tire_monitor:v0.1.3
     build:
       context: ./tire_monitor
       dockerfile: Dockerfile
